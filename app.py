@@ -11,8 +11,14 @@ from middleware import register_middleware
 load_dotenv()
 
 database_url = os.getenv('DATABASE_URL')
-if database_url and database_url.startswith("postgres://"):
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
+if database_url:
+    # Fix 'postgres://' to 'postgresql://'
+    if database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+    
+    # Ensure it uses the 'psycopg' (v3) driver if it doesn't specify one
+    if "postgresql://" in database_url and "+psycopg" not in database_url:
+        database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
