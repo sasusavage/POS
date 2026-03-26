@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reporting Dashboard | Architectural Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .jeweled-cta {
+            background: linear-gradient(135deg, #000b60 0%, #142283 100%);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-tertiary-container": "#e17c5a",
+                "on-tertiary": "#ffffff",
+                "primary": "#000b60",
+                "outline-variant": "#c6c5d4",
+                "on-primary-fixed-variant": "#303c9a",
+                "on-error": "#ffffff",
+                "surface-bright": "#f8f9fa",
+                "error-container": "#ffdad6",
+                "on-secondary": "#ffffff",
+                "inverse-surface": "#2e3132",
+                "primary-container": "#142283",
+                "primary-fixed": "#dfe0ff",
+                "on-primary-container": "#8390f2",
+                "tertiary-fixed-dim": "#ffb59d",
+                "tertiary": "#380b00",
+                "error": "#ba1a1a",
+                "on-secondary-fixed": "#071e27",
+                "on-primary-fixed": "#000c62",
+                "surface-container-low": "#f3f4f5",
+                "background": "#f8f9fa",
+                "on-secondary-fixed-variant": "#354a53",
+                "on-secondary-container": "#526772",
+                "on-primary": "#ffffff",
+                "secondary": "#4c616c",
+                "on-error-container": "#93000a",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed": "#ffdbd0",
+                "on-background": "#191c1d",
+                "on-tertiary-fixed": "#390c00",
+                "tertiary-container": "#5c1800",
+                "secondary-fixed-dim": "#b4cad6",
+                "surface-container": "#edeeef",
+                "on-surface": "#191c1d",
+                "on-surface-variant": "#454652",
+                "surface-container-highest": "#e1e3e4",
+                "inverse-on-surface": "#f0f1f2",
+                "surface-tint": "#4955b3",
+                "surface-variant": "#e1e3e4",
+                "inverse-primary": "#bcc2ff",
+                "surface": "#f8f9fa",
+                "secondary-fixed": "#cfe6f2",
+                "primary-fixed-dim": "#bcc2ff",
+                "surface-container-high": "#e7e8e9",
+                "on-tertiary-fixed-variant": "#7b2e12",
+                "surface-dim": "#d9dadb",
+                "outline": "#767683",
+                "secondary-container": "#cfe6f2"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full flex items-center justify-between px-6 py-3 bg-slate-50/85 backdrop-blur-md z-50 border-b border-slate-200/15 shadow-[0_20_40px_rgba(0,11,96,0.06)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-indigo-950 font-manrope">Architectural Intelligence</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 hover:text-indigo-600 font-manrope text-sm font-medium tracking-tight transition-colors duration-200" href="reporting_dashboard.html">Dashboard</a>
+<a class="text-slate-500 hover:text-indigo-600 font-manrope text-sm font-medium tracking-tight transition-colors duration-200" href="inventory_management.html">Inventory</a>
+<a class="text-indigo-700 font-bold border-b-2 border-indigo-700 font-manrope text-sm tracking-tight" href="reporting_dashboard.html">Reporting</a>
+<a class="text-slate-500 hover:text-indigo-600 font-manrope text-sm font-medium tracking-tight transition-colors duration-200" href="pos_terminal_view.html">POS</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-low border-none rounded-full text-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search analytics..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all">
+<span class="material-symbols-outlined">sync</span>
+</button>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-100 rounded-lg transition-all">
+<img alt="User profile avatar" class="w-7 h-7 rounded-full object-cover" data-alt="professional male portrait with clean lighting and neutral background for corporate profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB51IO4Jl6wk06xsUI-htu-vcBLDiigxYYLTTC3b6dPyCzL8NFKGQ40jtbXBT5-mlqx2vQvTmQasayzitlXFzpWvPK6DsOkxICWny0a23lBnPse9eXOX9-jud2xo1Jleb7DjnQxKCAhGKNl-AFKEc1hF3Ap4Lbvhdyhm84Nx9ehzuOAs1Yfaf5cxUheeLggGs22DtPuGVDf2Osj4ytbHcczsvFgjK1zVAEy38AzWoiddW-c18GXN-qtEvMJayWrI1j2iFl2LFzdVzFd"/>
+<span class="text-sm font-medium text-indigo-900 font-manrope">Tenant Switcher</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full hidden lg:flex flex-col py-8 px-4 border-r border-slate-200/15 bg-slate-100 w-64 pt-20">
+<div class="mb-8 px-4">
+<h2 class="font-headline text-lg font-bold text-primary tracking-tight">HQ Command</h2>
+<p class="text-label-sm font-label uppercase tracking-widest text-slate-500 text-[10px]">Enterprise Tier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 font-manrope text-[13px] font-semibold uppercase tracking-widest hover:translate-x-1 transition-transform duration-300" href="reporting_dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 font-manrope text-[13px] font-semibold uppercase tracking-widest hover:translate-x-1 transition-transform duration-300" href="inventory_management.html">
+<span class="material-symbols-outlined">inventory_2</span>
+                Inventory
+            </a>
+<a class="bg-white text-indigo-700 rounded-xl shadow-sm px-4 py-3 flex items-center gap-3 font-manrope text-[13px] font-semibold uppercase tracking-widest" href="reporting_dashboard.html">
+<span class="material-symbols-outlined">analytics</span>
+                Reporting
+            </a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 font-manrope text-[13px] font-semibold uppercase tracking-widest hover:translate-x-1 transition-transform duration-300" href="pos_terminal_view.html">
+<span class="material-symbols-outlined">point_of_sale</span>
+                POS
+            </a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 font-manrope text-[13px] font-semibold uppercase tracking-widest hover:translate-x-1 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200/50">
+<button class="w-full jeweled-cta text-white rounded-xl py-3 px-4 flex items-center justify-center gap-2 font-bold mb-6 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+                Quick Sale
+            </button>
+<div class="space-y-1">
+<a class="text-slate-500 px-4 py-2 flex items-center gap-3 font-manrope text-[11px] font-semibold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+                    Help Center
+                </a>
+<a class="text-slate-500 px-4 py-2 flex items-center gap-3 font-manrope text-[11px] font-semibold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+                    Sign Out
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-20 px-6 md:px-12 pb-12 transition-all duration-300">
+<!-- Dashboard Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+<div>
+<span class="text-label-sm uppercase tracking-[0.2em] text-on-surface-variant font-semibold mb-2 block">Enterprise Analytics</span>
+<h1 class="text-4xl font-extrabold font-headline tracking-tighter text-primary">Sales Performance</h1>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex bg-surface-container-low p-1 rounded-full">
+<button class="px-4 py-1.5 rounded-full text-xs font-bold font-manrope bg-white shadow-sm text-primary">Daily</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-bold font-manrope text-slate-500 hover:text-primary transition-colors">Weekly</button>
+<button class="px-4 py-1.5 rounded-full text-xs font-bold font-manrope text-slate-500 hover:text-primary transition-colors">Monthly</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant/15 rounded-xl shadow-sm hover:shadow-md transition-all">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="text-sm font-medium">Oct 01 - Oct 31, 2023</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 jeweled-cta text-white rounded-xl shadow-lg hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+<span class="text-sm font-bold">Export Report</span>
+</button>
+</div>
+</div>
+<!-- Metric Cards: Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- Total Revenue -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed text-primary rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-full">+12.4%</span>
+</div>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-medium mb-1">Total Revenue</p>
+<h3 class="text-3xl font-extrabold font-headline tracking-tighter text-primary" id="revenueVal">GHS 0.00</h3>
+<div class="mt-4 h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+</div>
+<!-- Average Order Value -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<span class="text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-full">+3.2%</span>
+</div>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-medium mb-1">Total Transactions</p>
+<h3 class="text-3xl font-extrabold font-headline tracking-tighter text-primary" id="salesVal">0</h3>
+<p class="text-[10px] text-slate-400 mt-4">Transactions recorded</p>
+</div>
+<!-- Active Tenants -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+<span class="text-amber-600 text-xs font-bold bg-amber-50 px-2 py-1 rounded-full">Stable</span>
+</div>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-medium mb-1">Active Branches</p>
+<h3 class="text-3xl font-extrabold font-headline tracking-tighter text-primary" id="branchesVal">0</h3>
+<div class="flex -space-x-2 mt-4">
+    <div class="w-24 h-6 text-xs font-bold text-slate-400">Loading...</div>
+</div>
+</div>
+<!-- Conversion Rate -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-indigo-50 text-indigo-700 rounded-lg">
+<span class="material-symbols-outlined">insights</span>
+</div>
+<span class="text-error text-xs font-bold bg-error-container/30 px-2 py-1 rounded-full">-1.5%</span>
+</div>
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant font-medium mb-1">Conversion Rate</p>
+<h3 class="text-3xl font-extrabold font-headline tracking-tighter text-primary">18.4%</h3>
+<p class="text-[10px] text-slate-400 mt-4">vs 19.9% last month</p>
+</div>
+</div>
+
+<script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = 'platform_login_page.html';
+
+    async function fetchStats() {
+        try {
+            const response = await fetch('/dashboard/stats', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.status === 401) window.location.href = 'platform_login_page.html';
+            
+            const data = await response.json();
+            document.getElementById('revenueVal').innerText = `GHS ${data.total_revenue.toLocaleString()}`;
+            document.getElementById('salesVal').innerText = data.total_sales;
+            document.getElementById('branchesVal').innerText = data.active_branches;
+        } catch (error) {
+            console.error('Error fetching stats:', error);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchStats);
+</script>
+<!-- Charts & Filters Section -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<!-- Filter Sidebar (Responsive) -->
+<div class="xl:col-span-3 space-y-6">
+<div class="bg-surface-container-low p-6 rounded-2xl">
+<h4 class="font-headline font-bold text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Data Refinement
+                    </h4>
+<div class="space-y-6">
+<div>
+<label class="text-label-sm uppercase tracking-wider text-slate-500 font-bold mb-3 block">Product Category</label>
+<select class="w-full bg-white border-none rounded-xl text-sm py-3 px-4 focus:ring-2 focus:ring-primary/20 shadow-sm">
+<option>All Categories</option>
+<option>Architectural Hardware</option>
+<option>Smart Lighting</option>
+<option>Sustainable Materials</option>
+</select>
+</div>
+<div>
+<label class="text-label-sm uppercase tracking-wider text-slate-500 font-bold mb-3 block">Branch Location</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-3 bg-white rounded-xl cursor-pointer hover:bg-slate-50 transition-colors shadow-sm">
+<input checked="" class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm font-medium">New York Flagship</span>
+</label>
+<label class="flex items-center gap-3 p-3 bg-white rounded-xl cursor-pointer hover:bg-slate-50 transition-colors shadow-sm">
+<input class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm font-medium">London Studio</span>
+</label>
+<label class="flex items-center gap-3 p-3 bg-white rounded-xl cursor-pointer hover:bg-slate-50 transition-colors shadow-sm">
+<input class="rounded text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm font-medium">Tokyo Concept</span>
+</label>
+</div>
+</div>
+<div>
+<label class="text-label-sm uppercase tracking-wider text-slate-500 font-bold mb-3 block">Payment Method</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-2 bg-primary text-white text-xs font-bold rounded-full">Cash</button>
+<button class="px-3 py-2 bg-white text-slate-600 text-xs font-bold rounded-full border border-slate-200">Credit Card</button>
+<button class="px-3 py-2 bg-white text-slate-600 text-xs font-bold rounded-full border border-slate-200">Digital Wallet</button>
+</div>
+</div>
+<button class="w-full py-3 bg-white border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all">
+                            Reset Filters
+                        </button>
+</div>
+</div>
+<!-- Quick Insight Panel -->
+<div class="bg-primary text-white p-6 rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-headline font-bold text-lg mb-2">Predictive Growth</h4>
+<p class="text-indigo-200 text-xs leading-relaxed mb-4">Based on current trends, we anticipate a 14% increase in 'Sustainable Materials' next quarter.</p>
+<a class="text-xs font-bold flex items-center gap-1 group" href="#">
+                            View Forecast <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+</div>
+</div>
+<!-- Analytics Visualizations -->
+<div class="xl:col-span-9 space-y-8">
+<!-- Main Line Chart: Sales Summary -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/15 shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-xl font-extrabold font-headline tracking-tight text-primary">Sales Revenue Trend</h3>
+<p class="text-sm text-slate-400">Monthly aggregate data across all platforms</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-slate-600">Actual</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-indigo-200"></span>
+<span class="text-xs font-medium text-slate-600">Target</span>
+</div>
+</div>
+</div>
+<!-- SVG Chart Implementation (Simulated UI Chart) -->
+<div class="relative h-[300px] w-full mt-4">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 1000 300">
+<!-- Grid Lines -->
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="0" y2="0"></line>
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="100" y2="100"></line>
+<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="200" y2="200"></line>
+<line stroke="#e2e8f0" stroke-width="1" x1="0" x2="1000" y1="300" y2="300"></line>
+<!-- Target Line (Light Indigo) -->
+<path d="M0,220 Q100,200 200,180 T400,150 T600,160 T800,120 T1000,100" fill="none" stroke="#dfe0ff" stroke-dasharray="8 4" stroke-width="4"></path>
+<!-- Actual Line (Deep Indigo) -->
+<path d="M0,250 Q100,230 200,150 T400,190 T600,100 T800,140 T1000,60" fill="none" stroke="#000b60" stroke-width="4"></path>
+<!-- Dots for points -->
+<circle cx="200" cy="150" fill="#000b60" r="5" stroke="white" stroke-width="2"></circle>
+<circle cx="600" cy="100" fill="#000b60" r="5" stroke="white" stroke-width="2"></circle>
+<circle cx="1000" cy="60" fill="#000b60" r="5" stroke="white" stroke-width="2"></circle>
+</svg>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-4 px-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Jan</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Feb</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mar</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Apr</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">May</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Jun</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Top Selling Products Bar Graph -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/15 shadow-sm">
+<h3 class="text-xl font-extrabold font-headline tracking-tight text-primary mb-6">Top Selling Products</h3>
+<div class="space-y-6">
+<!-- Product 1 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-indigo-900">Eames Lounge Chair</span>
+<span class="font-manrope font-bold">$124,000</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[85%] rounded-full"></div>
+</div>
+</div>
+<!-- Product 2 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-indigo-900">Marble Kitchen Island</span>
+<span class="font-manrope font-bold">$98,500</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] rounded-full"></div>
+</div>
+</div>
+<!-- Product 3 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-indigo-900">Smart Grid Lighting</span>
+<span class="font-manrope font-bold">$72,200</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[45%] rounded-full"></div>
+</div>
+</div>
+<!-- Product 4 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-bold text-indigo-900">Acoustic Oak Panels</span>
+<span class="font-manrope font-bold">$45,000</span>
+</div>
+<div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[30%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Distribution & Cashier Performance -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/15 shadow-sm">
+<h3 class="text-xl font-extrabold font-headline tracking-tight text-primary mb-6">Staff Performance</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-3">
+<img alt="Cashier" class="w-10 h-10 rounded-full border-2 border-white" data-alt="professional female profile portrait with a friendly smile and office attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbojlAupZo0jL-MiNcsFUY89FuXEW8uHBjNAxc2d-aa6pcw4jZffglIcz1gzy9GXXHvrWuVI_d3fxy_l3yF1tLlNZGxGcGIdcF6yVoGb0aeecZHRQ6d2VdDnbkgpYFmUuCGPxZAj2ljOyAeWLvCNbsSq5SRnbMzyw9iKKpAEawDkK0eiYc18mYp5Q4HUfCgNrnNmKysHwkZybjgTuy0cklRjGd6FEh-HFNK14WervORKCImlv_UrPN8yDJKY3JsT_2mMYTUS7t1BHA"/>
+<div>
+<p class="font-bold text-sm text-indigo-900">Elena Rodriguez</p>
+<p class="text-[10px] text-slate-400">Senior Concierge</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-manrope font-bold text-sm">$84.2k</p>
+<p class="text-[10px] text-emerald-600 font-bold">TOP PERFORMER</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-3">
+<img alt="Cashier" class="w-10 h-10 rounded-full border-2 border-white" data-alt="professional male profile portrait wearing a clean neutral shirt and glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh4MBMxtAzEKXIsi3hdqtd05C6AGYCFeRGxYdf6GIdkF-VroLcBnPvRRpZEwCcTIoYbYtJUbWZrtipMj2boBe9Fp1Eo7DDfgyyDNLfHigAvr_GP9XRN6HslqCxAs_PFHuFdVVhXH75w3QfHbfOl_-QIs12rHLvRLAUOKKbZPAQjHeW8McGcbYp--dKD03GyijGg7xNoLqP6ddmowhflkStSiQAHN8Ioh5jq06cSn5rLJYldxdTVTyksb35yJSyzExOxBj3w-ST-q-B"/>
+<div>
+<p class="font-bold text-sm text-indigo-900">Marcus Thorne</p>
+<p class="text-[10px] text-slate-400">Sales Associate</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-manrope font-bold text-sm">$62.5k</p>
+<p class="text-[10px] text-slate-400 font-bold">84% QUOTA</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-3">
+<img alt="Cashier" class="w-10 h-10 rounded-full border-2 border-white" data-alt="young professional woman with a minimalist modern style for work profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvpWNRtVxX-xBXVO99vdm1kgPprqizyDrlSTVNMyGj4LrpenkHyjgmwMTbXgubrfHDHtUlqgdzyfsGNcbCebN686-P7dpeM2k7R5wqtq3HzZ-4eo6JQCh5ccf5VV4YtqTHH1NLSbK4FgCmIxJ0D1tRk0QMGfT_4b2sf3J5_PRV5H7cG49hJwzbnui2q0WXCh46QvVrTUSJI95U7YK-utD24Vy0wDaGnURNKz5gI43dImqbnpgUw75gtZztLpYL9fLLxVVZUgvbBWsR"/>
+<div>
+<p class="font-bold text-sm text-indigo-900">Sarah Jenkins</p>
+<p class="text-[10px] text-slate-400">Boutique Manager</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-manrope font-bold text-sm">$59.1k</p>
+<p class="text-[10px] text-slate-400 font-bold">79% QUOTA</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Transaction Log (Editorial Table Style) -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/15 shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-extrabold font-headline tracking-tight text-primary">Recent Transactions</h3>
+<a class="text-xs font-bold text-primary underline underline-offset-4" href="#">View All Activity</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-3">
+<thead>
+<tr class="text-on-surface-variant font-label text-[10px] uppercase tracking-widest">
+<th class="px-4 pb-4">Transaction ID</th>
+<th class="px-4 pb-4">Product</th>
+<th class="px-4 pb-4">Branch</th>
+<th class="px-4 pb-4">Method</th>
+<th class="px-4 pb-4 text-right">Amount</th>
+<th class="px-4 pb-4 text-right">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="bg-surface group hover:bg-slate-50 transition-colors">
+<td class="px-4 py-4 rounded-l-xl font-manrope font-medium text-slate-500">#AI-98402</td>
+<td class="px-4 py-4 font-bold text-indigo-900">Terrazzo Floor Tiles (Bulk)</td>
+<td class="px-4 py-4 text-slate-600">New York Flagship</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">credit_card</span>
+                                            Amex
+                                        </span>
+</td>
+<td class="px-4 py-4 font-manrope font-extrabold text-right">$4,200.00</td>
+<td class="px-4 py-4 rounded-r-xl text-right">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold">COMPLETED</span>
+</td>
+</tr>
+<tr class="bg-surface-container-low group hover:bg-slate-50 transition-colors">
+<td class="px-4 py-4 rounded-l-xl font-manrope font-medium text-slate-500">#AI-98401</td>
+<td class="px-4 py-4 font-bold text-indigo-900">Custom Atrium Skylight</td>
+<td class="px-4 py-4 text-slate-600">London Studio</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">account_balance</span>
+                                            Bank Transfer
+                                        </span>
+</td>
+<td class="px-4 py-4 font-manrope font-extrabold text-right">$12,850.00</td>
+<td class="px-4 py-4 rounded-r-xl text-right">
+<span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[10px] font-bold">PENDING</span>
+</td>
+</tr>
+<tr class="bg-surface group hover:bg-slate-50 transition-colors">
+<td class="px-4 py-4 rounded-l-xl font-manrope font-medium text-slate-500">#AI-98400</td>
+<td class="px-4 py-4 font-bold text-indigo-900">Smart Home OS Bundle</td>
+<td class="px-4 py-4 text-slate-600">Tokyo Concept</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">payments</span>
+                                            Cash
+                                        </span>
+</td>
+<td class="px-4 py-4 font-manrope font-extrabold text-right">$1,120.00</td>
+<td class="px-4 py-4 rounded-r-xl text-right">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold">COMPLETED</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Navigation Bottom Bar -->
+<nav class="fixed bottom-0 left-0 w-full bg-slate-50/95 backdrop-blur-md flex md:hidden items-center justify-around py-4 px-2 z-50 shadow-[0_-10px_30px_rgba(0,11,96,0.04)]">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Inventory</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined font-variation-settings-'FILL'-1">analytics</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Reports</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">POS</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
+</button>
+</nav>
+</body></html>

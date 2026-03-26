@@ -1,0 +1,15 @@
+flask==3.0.0
+flask-sqlalchemy==3.1.1
+flask-jwt-extended==4.5.3
+python-dotenv==1.0.0
+flask-migrate==4.0.5
+redis==5.0.1
+rq==1.15.1
+marshmallow==3.20.1
+flask-marshmallow==0.15.0
+passlib==1.7.4
+bcrypt==4.1.2
+gunicorn==21.2.0
+psycopg[binary]==3.1.18
+psycopg-binary==3.1.18
+psycopg==3.1.18

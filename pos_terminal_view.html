@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Architectural Intelligence | POS Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-tertiary-container": "#e17c5a",
+                "on-tertiary": "#ffffff",
+                "primary": "#000b60",
+                "outline-variant": "#c6c5d4",
+                "on-primary-fixed-variant": "#303c9a",
+                "on-error": "#ffffff",
+                "surface-bright": "#f8f9fa",
+                "error-container": "#ffdad6",
+                "on-secondary": "#ffffff",
+                "inverse-surface": "#2e3132",
+                "primary-container": "#142283",
+                "primary-fixed": "#dfe0ff",
+                "on-primary-container": "#8390f2",
+                "tertiary-fixed-dim": "#ffb59d",
+                "tertiary": "#380b00",
+                "error": "#ba1a1a",
+                "on-secondary-fixed": "#071e27",
+                "on-primary-fixed": "#000c62",
+                "surface-container-low": "#f3f4f5",
+                "background": "#f8f9fa",
+                "on-secondary-fixed-variant": "#354a53",
+                "on-secondary-container": "#526772",
+                "on-primary": "#ffffff",
+                "secondary": "#4c616c",
+                "on-error-container": "#93000a",
+                "surface-container-lowest": "#ffffff",
+                "tertiary-fixed": "#ffdbd0",
+                "on-background": "#191c1d",
+                "on-tertiary-fixed": "#390c00",
+                "tertiary-container": "#5c1800",
+                "secondary-fixed-dim": "#b4cad6",
+                "surface-container": "#edeeef",
+                "on-surface": "#191c1d",
+                "on-surface-variant": "#454652",
+                "surface-container-highest": "#e1e3e4",
+                "inverse-on-surface": "#f0f1f2",
+                "surface-tint": "#4955b3",
+                "surface-variant": "#e1e3e4",
+                "inverse-primary": "#bcc2ff",
+                "surface": "#f8f9fa",
+                "secondary-fixed": "#cfe6f2",
+                "primary-fixed-dim": "#bcc2ff",
+                "surface-container-high": "#e7e8e9",
+                "on-tertiary-fixed-variant": "#7b2e12",
+                "surface-dim": "#d9dadb",
+                "outline": "#767683",
+                "secondary-container": "#cfe6f2"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3, .font-headline {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-hidden h-screen">
+<header class="fixed top-0 w-full flex items-center justify-between px-6 py-3 bg-slate-50/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200/15 dark:border-slate-800/15 shadow-[0_20_40px_rgba(0,11,96,0.06)] dark:shadow-none z-50">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-indigo-950 dark:text-white font-manrope">Architectural Intelligence</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-indigo-700 dark:text-indigo-400 font-bold border-b-2 border-indigo-700 font-manrope text-sm tracking-tight py-1" href="pos_terminal_view.html">POS</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 font-manrope text-sm tracking-tight transition-colors duration-200" href="inventory_management.html">Inventory</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 font-manrope text-sm tracking-tight transition-colors duration-200" href="reporting_dashboard.html">Reporting</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">sync</span>
+<span class="text-label-sm font-medium text-on-surface-variant">Live Sync</span>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/30">
+<div class="text-right">
+<p class="text-xs font-bold text-primary leading-none uppercase tracking-widest">Main Terminal</p>
+<p class="text-[10px] text-on-surface-variant">Store #402</p>
+</div>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/10" data-alt="Professional studio portrait of a store manager in a clean modern environment with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJmTx3A6OKg7_n3RnO_UJ2eK-1ZfoNelF8IvazYgXobjUm6b9-TfyOzjFo63r_xhYv3k3a00nmE-6yNUBs6AYfQCPvnHw34sq-XXAEYiQuLZfsZrEmBsHCFgWi8LxwSkqMW_ZzOsMZOB4WnrGRcih0cmxOvC-hX0eLNnalTXrguD8IMQfGfoG3o3ohmo_84qphvtVtBBtc5F4g3yvowVeO7tfkCJLc4UyqlfarrPuyIEFMe3W31U5isXCFbVoVfk1kX2UGBauvwMog"/>
+</div>
+</div>
+</header>
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 px-4 border-r border-slate-200/15 bg-slate-100 dark:bg-slate-950 w-64 pt-20">
+<div class="mb-8 px-4">
+<h2 class="font-manrope text-[13px] font-semibold uppercase tracking-widest text-indigo-900 dark:text-indigo-300">HQ Command</h2>
+<p class="text-[10px] text-slate-500 font-medium">Enterprise Tier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300" href="reporting_dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-manrope text-[13px] font-semibold uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300" href="inventory_management.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-manrope text-[13px] font-semibold uppercase tracking-widest">Inventory</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300" href="reporting_dashboard.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-manrope text-[13px] font-semibold uppercase tracking-widest">Reporting</span>
+</a>
+<a class="bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 rounded-xl shadow-sm px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300" href="pos_terminal_view.html">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-manrope text-[13px] font-semibold uppercase tracking-widest">POS</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-manrope text-[13px] font-semibold uppercase tracking-widest">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-slate-200/15 pt-6 px-2 space-y-1">
+<a class="text-slate-500 px-4 py-2 flex items-center gap-3 text-xs font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                Help Center
+            </a>
+<a class="text-slate-500 px-4 py-2 flex items-center gap-3 text-xs font-semibold uppercase tracking-widest hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+                Sign Out
+            </a>
+</div>
+</aside>
+<main class="ml-64 mt-16 h-[calc(100vh-4rem)] grid grid-cols-12 overflow-hidden">
+<section class="col-span-8 p-8 flex flex-col h-full overflow-hidden">
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex items-center justify-between">
+<h1 class="text-display-md font-headline text-primary tracking-tight font-extrabold text-3xl">Checkout</h1>
+<div class="flex items-center gap-3">
+<span class="text-label-sm uppercase tracking-[0.2em] text-on-surface-variant font-semibold">Active Session:</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold">#S-9821</span>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="relative flex-1 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary/20 text-body-md placeholder:text-on-surface-variant/50 transition-all" placeholder="Search product name, SKU or category..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-6 py-4 bg-surface-container-highest rounded-full text-primary font-bold hover:bg-surface-dim transition-colors group">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">barcode_scanner</span>
+<span class="font-manrope text-sm tracking-tight uppercase">Scan Item</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-4 -mr-4 custom-scrollbar">
+<div class="grid grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="bg-surface-container-lowest p-5 rounded-xl hover:shadow-[0_12px_24px_rgba(0,11,96,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/10 flex flex-col gap-4 group">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+<img alt="Product 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Minimalist white designer wristwatch on a clean grey background with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6ZJbjbaelxC8TnZ_dVBhdus94nond0PTNx8SeYviBrtOCocHQVjYTu0nUAf0VaISmkFJ_t9ge4Wg81uWg7UeB9ZYDliy7t8vFsz70aE2zhQ1jJyveEKAFxFunoy_FqPczVwF5vmoHAOSHDlmJvEXRZilRX0lZI53Bmg3JjqWJfTTtl7xrYJeLS1TJbIMUACtjVC6RcC1wHoHkBBeCxSqpkh-E0ygB4WYk7HXoyePknYRdAqe8AEL2zUE9cCV3Uh4XAe7w0aWlJPJW"/>
+</div>
+<div>
+<span class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase tracking-widest bg-tertiary-fixed px-2 py-0.5 rounded">Electronics</span>
+<h3 class="font-headline font-bold text-on-surface mt-2 text-lg">Signature Chrono</h3>
+<p class="font-manrope font-extrabold text-primary text-xl mt-1">$249.00</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl hover:shadow-[0_12px_24px_rgba(0,11,96,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/10 flex flex-col gap-4 group">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+<img alt="Product 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="High-end wireless headphones in black matte finish, studio lighting on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXIDOWCpDqdX2MJgqXlksbhJRdBy04M7bfebj68C7RB53RwxvmGlQdO4LeUkoU3a-s9T0VmEH6aH0FFPPjv8ZDG1z5VkYHDsAzV8JrZxpyzUqngkZloPpN_WwfjFDVXLzfuKLQC4SQp-eM5ZMDSk5XRc4hwrxbHo6UWe5grkceE7T7sXzuPDxz0aQAzcQN4r4_0q8t9r3hkBPK6qUvhQYMKx_Kq5T7k7QjBh-giGAzQX0gQarIN65DCAWzNEBn4iHOvqgt26HlElDC"/>
+</div>
+<div>
+<span class="text-[10px] font-bold text-on-secondary-container uppercase tracking-widest bg-secondary-container px-2 py-0.5 rounded">Audio</span>
+<h3 class="font-headline font-bold text-on-surface mt-2 text-lg">Studio Wireless</h3>
+<p class="font-manrope font-extrabold text-primary text-xl mt-1">$399.00</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl hover:shadow-[0_12px_24px_rgba(0,11,96,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/10 flex flex-col gap-4 group">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low relative">
+<img alt="Product 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Red athletic running shoe on a minimalist background, professional commercial photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoAIAcXX937mYsCP_0h97zyaaEQSjvuf15IbP9Ky_RVPRn4tgrdMcbGCTaU3yLMmVtWZoKGHwlgqvBCSetix7WOGkjmKGK9w404JIES5OFi6qVf1W9G6yvcueyG8VRpatinLAGsRE5r64Tx92EHb0qF5lqDPlYUHUh2xhG9MtLQXPpp7wx_YESucMgGK1rxD3ebcCc1RMhqF-niNtVmSG93Y86xPA3txcekT_9QmNfBgruWw4JnGWgUxv2kzLSxGvZh5keEFXBX9cA"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-tertiary-container text-on-tertiary-container rounded text-[10px] font-bold uppercase">Low Stock</div>
+</div>
+<div>
+<span class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase tracking-widest bg-tertiary-fixed px-2 py-0.5 rounded">Footwear</span>
+<h3 class="font-headline font-bold text-on-surface mt-2 text-lg">Air Runner Pro</h3>
+<p class="font-manrope font-extrabold text-primary text-xl mt-1">$159.00</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl hover:shadow-[0_12px_24px_rgba(0,11,96,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/10 flex flex-col gap-4 group">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+<img alt="Product 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Vintage style polaroid camera on a bright minimalist surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIadXWrK8R_vdyZFyI9FMWBXEyqN_qJntRTQhAa-W8UBaTWLkukv54QeOJtqIXY2YVm3WfxCVrtX2MkWkB8m27Nt1ECpaBYc49mRisk7cSLPAmWQoJOMGsEod3A-BegLlj83H9wtjkfluzREi7tcJJGGj7Cx40bDbanrx29vWv91nqkG_Kwr-K5w3ZEe7ATDrhXf0E_2O_v5OOQ-CfV1FAZ6WE6sJuolibhM5SeLT-RFvseZgHpLKgDFzwm2qtMpMi2RbCJKX6P-q5"/>
+</div>
+<div>
+<span class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase tracking-widest bg-tertiary-fixed px-2 py-0.5 rounded">Photography</span>
+<h3 class="font-headline font-bold text-on-surface mt-2 text-lg">Instant Cam 2</h3>
+<p class="font-manrope font-extrabold text-primary text-xl mt-1">$89.00</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl hover:shadow-[0_12px_24px_rgba(0,11,96,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/10 flex flex-col gap-4 group">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+<img alt="Product 5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Minimalist architectural desk lamp with clean geometric lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYHDV3cBQQno-FS-kCQnEMQPHdAVXAnrtimh3nzSn5zYaLg2Or94XPNXG3hM4MUqoEDFnJ2GeIp4C3Tt3GxfhYp2fo8mv_mmfgIqhOLbsm1uwzA3Jie3F1pCvfRJbOU6brSYiNR31cLl-HXWodP2SrtlwLv38ZfAypjCD7WCjhPABWCMCCldRco6kXJIDWSiB_wd8bznRHmU7Vq8L0ew6dU05dn4Bon4CQ4zZIsLAufWRTqnE3FqNJxY9QV_H_NUFgME9SCT-ipjei"/>
+</div>
+<div>
+<span class="text-[10px] font-bold text-on-secondary-container uppercase tracking-widest bg-secondary-container px-2 py-0.5 rounded">Home</span>
+<h3 class="font-headline font-bold text-on-surface mt-2 text-lg">Linear Desk Lamp</h3>
+<p class="font-manrope font-extrabold text-primary text-xl mt-1">$120.00</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="col-span-4 bg-surface-container-low flex flex-col h-full border-l border-outline-variant/15">
+<div class="p-6 border-b border-outline-variant/10">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline font-extrabold text-xl text-primary tracking-tight">Current Cart</h2>
+<span class="px-2 py-1 bg-primary text-on-primary rounded text-[10px] font-bold uppercase">3 Items</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-xl bg-surface-container-highest text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:bg-surface-dim transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span>
+                        Hold Order
+                    </button>
+<button class="flex-1 py-2 rounded-xl bg-surface-container-highest text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:bg-surface-dim transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">sell</span>
+                        Add Discount
+                    </button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 rounded-xl bg-white flex-shrink-0 overflow-hidden shadow-sm">
+<img alt="Thumb" class="w-full h-full object-cover" data-alt="Watch detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkPz6kn58mFmr5t1KD2XrIycahZgRyj3s8xrz4DGVwDmZovYqbpHm-qhffHUf7hFFAfFBBSIy2VmmUh-aRzucqGvfDN9ORkZIa7MPnMb6sV4kJQvbxsPBqoEL0LFq4AHPSh0ThSbcBZtFbU5j1ywjgooR1X2kHdnLyNEdpTrSwaNz3wVUKK0X3pnErHWmpY-dnxtUJula2dDSLrvajk4AckclhHz33SyADYmKjeMoSGI2mW7GWr_g7My_UavzqIl_OumS95auQbjFC"/>
+</div>
+<div class="flex-1">
+<h4 class="font-headline font-bold text-sm text-on-surface leading-tight">Signature Chrono</h4>
+<p class="text-[11px] text-on-surface-variant font-medium">SKU: AI-CH-90</p>
+<div class="flex items-center gap-3 mt-2">
+<button class="w-6 h-6 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<span class="font-manrope font-bold text-sm">1</span>
+<button class="w-6 h-6 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<div class="text-right">
+<p class="font-manrope font-extrabold text-primary">$249.00</p>
+<button class="text-error/40 hover:text-error transition-colors mt-1">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 rounded-xl bg-white flex-shrink-0 overflow-hidden shadow-sm">
+<img alt="Thumb" class="w-full h-full object-cover" data-alt="Headphones detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfINfgv4-Vny9wPmTL13cHwP0SToG7tFzoag-gX-OqNpvtRXRbCmAqRUBjat2U0ucECR89sm0F093jXdVuPa0lrXXCHAa8Nsd2Xef8oJWwjzi6hdt6C456P_QtuLi3oAub_JDKPi6VAfddB3AIeEevB1f6oi5_UOU-EDJ9GYGHLxb_hBHCd3M3CWe6JFIbiE0WcoomZxGPzpKpULSdH-LffcKS3fBgKUTQGFmi3RfxKlXL00RuBmNW9UGThWa6zJYLeKxXiDZt-zxz"/>
+</div>
+<div class="flex-1">
+<h4 class="font-headline font-bold text-sm text-on-surface leading-tight">Studio Wireless</h4>
+<p class="text-[11px] text-on-surface-variant font-medium">SKU: AI-AUD-21</p>
+<div class="flex items-center gap-3 mt-2">
+<button class="w-6 h-6 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<span class="font-manrope font-bold text-sm">1</span>
+<button class="w-6 h-6 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<div class="text-right">
+<p class="font-manrope font-extrabold text-primary">$399.00</p>
+<button class="text-error/40 hover:text-error transition-colors mt-1">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 rounded-xl bg-white flex-shrink-0 overflow-hidden shadow-sm">
+<img alt="Thumb" class="w-full h-full object-cover" data-alt="Shoe detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4bfdDI7Scmdp4I4Sk3E_XGze1lWoV6ZwzEgaE_1deZdcW3jIU5wQsWObwnCOE2cDDTKYpTrkEZdmhVOy4Xo36smwwk0Lcrt9eNK7hB6lwPobLL14XwMuumY4TthTpBDoN62hYAb8ay59kAQc3gNZRUJBWwOXTtqylKLObdSE6zwF7vqeEmsaKTSeLGT8GGUTzaQnEQnS9CF5TH__ufH7svYOjSVLj2F7HLl5F4T5RRM51zmE8cfbeMBjW6tPygJgYdvsm6x9TlUz7"/>
+</div>
+<div class="flex-1">
+<h4 class="font-headline font-bold text-sm text-on-surface leading-tight">Air Runner Pro</h4>
+<p class="text-[11px] text-on-surface-variant font-medium">SKU: AI-FT-05</p>
+<div class="flex items-center gap-3 mt-2">
+<button class="w-6 h-6 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<span class="font-manrope font-bold text-sm">1</span>
+<button class="w-6 h-6 rounded-lg bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<div class="text-right">
+<p class="font-manrope font-extrabold text-primary">$159.00</p>
+<button class="text-error/40 hover:text-error transition-colors mt-1">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-highest rounded-t-[2.5rem] shadow-[0_-10px_40px_rgba(0,11,96,0.04)]">
+<div class="space-y-3 mb-8">
+<div class="flex justify-between items-center">
+<span class="text-sm font-medium text-on-surface-variant uppercase tracking-widest">Subtotal</span>
+<span class="font-manrope font-bold text-on-surface text-lg">$807.00</span>
+</div>
+<div class="flex justify-between items-center text-tertiary">
+<span class="text-xs font-bold uppercase tracking-widest">Tax (8%)</span>
+<span class="font-manrope font-bold">$64.56</span>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 flex justify-between items-end">
+<span class="text-lg font-headline font-extrabold text-primary uppercase tracking-tighter">Total</span>
+<span class="text-3xl font-manrope font-extrabold text-primary">$871.56</span>
+</div>
+</div>
+<button class="w-full py-5 rounded-xl bg-gradient-to-br from-primary to-primary-container text-white font-manrope font-extrabold text-xl tracking-wide shadow-lg shadow-primary/20 flex items-center justify-center gap-3 active:scale-95 transition-all">
+<span class="material-symbols-outlined">payments</span>
+                    Pay &amp; Close
+                </button>
+</div>
+</section>
+<<script>
+    // --- State Management ---
+    let products = [];
+    let cart = [];
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        window.location.href = 'platform_login_page.html';
+    }
+
+    // --- API Calls ---
+    async function fetchProducts() {
+        try {
+            const response = await fetch('/pos/products', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.status === 401) window.location.href = 'platform_login_page.html';
+            if (response.status === 403) alert('Access Restricted: Billing Issue');
+            
+            products = await response.json();
+            renderProducts();
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    async function processCheckout(paymentMethod) {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.08;
+        
+        try {
+            const response = await fetch('/pos/transaction', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    total_amount: total,
+                    payment_method: paymentMethod,
+                    branch_id: null // Will be handled by backend from JWT if available
+                })
+            });
+
+            if (response.ok) {
+                alert('Transaction Successful!');
+                cart = [];
+                renderCart();
+                document.getElementById('paymentModal').style.display = 'none';
+            } else {
+                const err = await response.json();
+                alert('Error: ' + err.msg);
+            }
+        } catch (error) {
+            alert('Checkout failed. Check console.');
+        }
+    }
+
+    // --- UI Rendering ---
+    function renderProducts() {
+        const grid = document.querySelector('.grid.grid-cols-3');
+        grid.innerHTML = products.map(p => `
+            <div onclick="addToCart('${p.id}')" class="bg-surface-container-lowest p-5 rounded-xl hover:shadow-[0_12px_24px_rgba(0,11,96,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/10 flex flex-col gap-4 group">
+                <div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+                    <img src="https://via.placeholder.com/150" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <span class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase tracking-widest bg-tertiary-fixed px-2 py-0.5 rounded">${p.category}</span>
+                    <h3 class="font-headline font-bold text-on-surface mt-2 text-lg">${p.name}</h3>
+                    <p class="font-manrope font-extrabold text-primary text-xl mt-1">GHS ${p.variants[0].price.toFixed(2)}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        const variant = product.variants[0];
+        const existing = cart.find(item => item.id === variant.id);
+        
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ id: variant.id, name: product.name, price: variant.price, quantity: 1 });
+        }
+        renderCart();
+    }
+
+    function renderCart() {
+        const cartList = document.querySelector('.flex-1.overflow-y-auto.px-6');
+        cartList.innerHTML = cart.map(item => `
+            <div class="flex items-center gap-4 group">
+                <div class="flex-1">
+                    <h4 class="font-headline font-bold text-sm text-on-surface leading-tight">${item.name}</h4>
+                    <div class="flex items-center gap-3 mt-2">
+                        <span class="font-manrope font-bold text-sm">${item.quantity} x GHS ${item.price.toFixed(2)}</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="font-manrope font-extrabold text-primary">GHS ${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+            </div>
+        `).join('');
+
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const tax = subtotal * 0.08;
+        const total = subtotal + tax;
+
+        document.querySelector('.text-on-surface.text-lg').innerText = `GHS ${subtotal.toFixed(2)}`;
+        document.querySelector('.text-tertiary .font-manrope').innerText = `GHS ${tax.toFixed(2)}`;
+        document.querySelector('.text-3xl.font-manrope').innerText = `GHS ${total.toFixed(2)}`;
+    }
+
+    // --- Init ---
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchProducts();
+        
+        // Hide modal by default
+        const modal = document.querySelector('.fixed.inset-0.z-\\[100\\]');
+        modal.id = 'paymentModal';
+        modal.style.display = 'none';
+
+        // Bind Pay button
+        document.querySelector('button.w-full.py-5').addEventListener('click', () => {
+            if (cart.length === 0) return alert('Cart is empty');
+            modal.style.display = 'flex';
+        });
+
+        // Bind Payment Methods
+        document.querySelectorAll('#paymentModal button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const method = btn.innerText.trim();
+                if (method === 'Cancel') {
+                    modal.style.display = 'none';
+                } else if (['Cash', 'MoMo', 'Card/Transfer'].includes(method)) {
+                    processCheckout(method);
+                }
+            });
+        });
+    });
+</script>
+</body></html>

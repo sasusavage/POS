@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Management | Architectural Intelligence</title>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#e17c5a",
+              "on-tertiary": "#ffffff",
+              "primary": "#000b60",
+              "outline-variant": "#c6c5d4",
+              "on-primary-fixed-variant": "#303c9a",
+              "on-error": "#ffffff",
+              "surface-bright": "#f8f9fa",
+              "error-container": "#ffdad6",
+              "on-secondary": "#ffffff",
+              "inverse-surface": "#2e3132",
+              "primary-container": "#142283",
+              "primary-fixed": "#dfe0ff",
+              "on-primary-container": "#8390f2",
+              "tertiary-fixed-dim": "#ffb59d",
+              "tertiary": "#380b00",
+              "error": "#ba1a1a",
+              "on-secondary-fixed": "#071e27",
+              "on-primary-fixed": "#000c62",
+              "surface-container-low": "#f3f4f5",
+              "background": "#f8f9fa",
+              "on-secondary-fixed-variant": "#354a53",
+              "on-secondary-container": "#526772",
+              "on-primary": "#ffffff",
+              "secondary": "#4c616c",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed": "#ffdbd0",
+              "on-background": "#191c1d",
+              "on-tertiary-fixed": "#390c00",
+              "tertiary-container": "#5c1800",
+              "secondary-fixed-dim": "#b4cad6",
+              "surface-container": "#edeeef",
+              "on-surface": "#191c1d",
+              "on-surface-variant": "#454652",
+              "surface-container-highest": "#e1e3e4",
+              "inverse-on-surface": "#f0f1f2",
+              "surface-tint": "#4955b3",
+              "surface-variant": "#e1e3e4",
+              "inverse-primary": "#bcc2ff",
+              "surface": "#f8f9fa",
+              "secondary-fixed": "#cfe6f2",
+              "primary-fixed-dim": "#bcc2ff",
+              "surface-container-high": "#e7e8e9",
+              "on-tertiary-fixed-variant": "#7b2e12",
+              "surface-dim": "#d9dadb",
+              "outline": "#767683",
+              "secondary-container": "#cfe6f2"
+            },
+            fontFamily: {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-nav {
+        background: rgba(248, 249, 250, 0.85);
+        backdrop-filter: blur(20px);
+      }
+      .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #e1e3e4; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full flex items-center justify-between px-6 py-3 bg-slate-50/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200/15 z-50 shadow-[0_20_40px_rgba(0,11,96,0.06)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-indigo-950 dark:text-white font-manrope">Architectural Intelligence</span>
+<nav class="hidden md:flex items-center gap-6 font-manrope text-sm font-medium tracking-tight">
+<a class="text-slate-500 hover:text-indigo-600 transition-colors duration-200" href="reporting_dashboard.html">Dashboard</a>
+<a class="text-indigo-700 font-bold border-b-2 border-indigo-700" href="inventory_management.html">Inventory</a>
+<a class="text-slate-500 hover:text-indigo-600 transition-colors duration-200" href="reporting_dashboard.html">Reporting</a>
+<a class="text-slate-500 hover:text-indigo-600 transition-colors duration-200" href="pos_terminal_view.html">POS</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-full text-xs w-64 focus:ring-2 focus:ring-primary/20" placeholder="Quick search..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors"><span class="material-symbols-outlined">sync</span></button>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 pl-2 cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-primary leading-none">Tenant Switcher</p>
+<p class="text-[10px] text-slate-500">North Registry HQ</p>
+</div>
+<img alt="User profile avatar" class="w-9 h-9 rounded-xl object-cover ring-2 ring-white shadow-sm" data-alt="Professional portrait of a male executive in a dark suit with a clean office background in soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgznTTccShZd7rXnIT2CH00G71MrgDri-P7Io2hkL1-XgJSnd5fD8aLm-WR8Btp7XTBak0BhvyJmInhCptkkngNOdrGF9c1YmLwWxEiX5LlMpFKMgY4x_jjqhYSIokd2J7YcVoozk48A1jehtlZZtdXJduA7aajFa7TxiCgOrUpLu5IMiOwWCMsSry24w7zVDKIWjRJBKqhlizP8RwuPKCm9mZJfvc49-td6qJPie7h8zGoltlSM_4WK7Wpceezy9tdrz-LQPttidQ"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-950 py-8 px-4 border-r border-slate-200/15 hidden lg:flex flex-col z-40 mt-[60px]">
+<div class="mb-8 px-4">
+<h2 class="font-manrope text-[13px] font-semibold uppercase tracking-widest text-indigo-900">HQ Command</h2>
+<p class="text-[10px] font-medium text-slate-500 tracking-wider">Enterprise Tier</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300 font-manrope text-[13px] font-semibold uppercase tracking-widest" href="reporting_dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="bg-white text-indigo-700 rounded-xl shadow-sm px-4 py-3 flex items-center gap-3 font-manrope text-[13px] font-semibold uppercase tracking-widest" href="inventory_management.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300 font-manrope text-[13px] font-semibold uppercase tracking-widest" href="reporting_dashboard.html">
+<span class="material-symbols-outlined">analytics</span>
+<span>Reporting</span>
+</a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300 font-manrope text-[13px] font-semibold uppercase tracking-widest" href="pos_terminal_view.html">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span>POS</span>
+</a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:translate-x-1 transition-transform duration-300 font-manrope text-[13px] font-semibold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 mb-6 font-manrope font-bold text-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+                Quick Sale
+            </button>
+<a class="text-slate-500 px-4 py-2 flex items-center gap-3 hover:text-indigo-600 transition-colors font-manrope text-[11px] font-semibold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span>Help Center</span>
+</a>
+<a class="text-slate-500 px-4 py-2 flex items-center gap-3 hover:text-error transition-colors font-manrope text-[11px] font-semibold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 pb-12 px-6 md:px-10 lg:px-16">
+<div class="max-w-[1400px] mx-auto">
+<!-- Page Header -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="font-headline text-[2.75rem] font-extrabold text-primary tracking-tight leading-tight mb-2">Inventory Catalog</h1>
+<p class="font-body text-on-surface-variant max-w-lg text-sm">Manage your product architectural lifecycle, variant stock levels, and global availability from a single command center.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-lowest text-on-surface border border-outline-variant/15 px-5 py-2.5 rounded-xl font-manrope font-bold text-sm shadow-sm flex items-center gap-2 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-lg">file_download</span>
+                        Export CSV
+                    </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2.5 rounded-xl font-manrope font-bold text-sm shadow-lg flex items-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                        Add New Product
+                    </button>
+</div>
+</header>
+<!-- Filters & Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<!-- Filter Section -->
+<div class="md:col-span-3 bg-white p-6 rounded-xl shadow-[0_20_40px_rgba(0,11,96,0.06)] flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[200px]">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-2">Category Filter</p>
+<div class="flex gap-2">
+<button class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold">All Items</button>
+<button class="bg-surface-container-low text-on-secondary-container px-4 py-1.5 rounded-full text-xs font-semibold hover:bg-surface-container-highest transition-colors">Furniture</button>
+<button class="bg-surface-container-low text-on-secondary-container px-4 py-1.5 rounded-full text-xs font-semibold hover:bg-surface-container-highest transition-colors">Lighting</button>
+<button class="bg-surface-container-low text-on-secondary-container px-4 py-1.5 rounded-full text-xs font-semibold hover:bg-surface-container-highest transition-colors">Decor</button>
+</div>
+</div>
+<div class="h-10 w-px bg-outline-variant/20 hidden lg:block"></div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-2">Stock Status</p>
+<select class="bg-surface-container-low border-none rounded-xl text-xs font-semibold px-4 py-1.5 focus:ring-1 focus:ring-primary">
+<option>All Availability</option>
+<option>In Stock</option>
+<option>Low Stock</option>
+<option>Out of Stock</option>
+</select>
+</div>
+</div>
+<!-- Mini Stat Card -->
+<div class="bg-tertiary-container text-on-tertiary-fixed p-6 rounded-xl shadow-lg flex flex-col justify-center">
+<p class="font-label text-[10px] uppercase tracking-widest font-bold opacity-80 mb-1">Low Stock Alerts</p>
+<div class="flex items-center justify-between">
+<span class="font-headline text-3xl font-extrabold tracking-tighter">14</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-3xl">warning</span>
+</div>
+<p class="text-[10px] mt-2 font-medium">Requiring immediate restock</p>
+</div>
+</div>
+<!-- Product Table -->
+<div class="bg-white rounded-xl shadow-[0_20_40px_rgba(0,11,96,0.06)] overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Product Details</th>
+<th class="px-6 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Category</th>
+<th class="px-6 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">SKU</th>
+<th class="px-6 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Stock Level</th>
+<th class="px-6 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<<tbody class="divide-y divide-outline-variant/10" id="inventoryTable">
+    <!-- Dynamic rows will be inserted here -->
+</tbody>
+</table>
+</div>
+<!-- Footer / Pagination -->
+<div class="px-6 py-4 bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-4">
+<p class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant" id="productCount">Loading Products...</p>
+</div>
+</div>
+<!-- Contextual Insight Panel -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-high p-6 rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">insights</span>
+<h3 class="font-headline text-lg font-bold text-primary">Stock Turnover</h3>
+</div>
+<p class="text-sm text-on-surface-variant mb-4">Your current catalog is synchronized with your multi-tenant data workspace.</p>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = 'platform_login_page.html';
+
+    async function fetchInventory() {
+        try {
+            const response = await fetch('/pos/products', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.status === 401) window.location.href = 'platform_login_page.html';
+            
+            const products = await response.json();
+            renderTable(products);
+            document.getElementById('productCount').innerText = `Showing ${products.length} Products`;
+        } catch (error) {
+            console.error('Error fetching inventory:', error);
+        }
+    }
+
+    function renderTable(products) {
+        const tableBody = document.getElementById('inventoryTable');
+        tableBody.innerHTML = products.map(p => `
+            <tr class="hover:bg-surface-container-lowest transition-colors group">
+                <td class="px-6 py-5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl overflow-hidden bg-surface shadow-sm">
+                            <img src="https://via.placeholder.com/50" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-manrope text-sm font-bold text-primary">${p.name}</p>
+                            <p class="text-[10px] text-on-surface-variant">ID: ${p.id.substring(0,8)}</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-5">
+                    <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase tracking-tighter">${p.category}</span>
+                </td>
+                <td class="px-6 py-5">
+                    <span class="font-manrope text-xs text-on-surface-variant">${p.variants[0]?.sku || 'N/A'}</span>
+                </td>
+                <td class="px-6 py-5">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-manrope text-sm font-extrabold text-on-surface">GHS ${p.variants[0]?.price.toFixed(2)}</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="px-6 py-5 text-right">
+                    <button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit_note</span></button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchInventory);
+    
+    // Sign out logic
+    document.querySelectorAll('a').forEach(a => {
+        if (a.innerText.trim().toLowerCase().includes('sign out')) {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                window.location.href = 'platform_login_page.html';
+            });
+        }
+    });
+</script>
+</body></html>

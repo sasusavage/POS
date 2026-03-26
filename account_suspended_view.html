@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Restricted | Architectural Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#191c1d",
+              "surface-tint": "#4955b3",
+              "primary-fixed-dim": "#bcc2ff",
+              "outline-variant": "#c6c5d4",
+              "tertiary-container": "#5c1800",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed": "#071e27",
+              "surface-container-highest": "#e1e3e4",
+              "on-tertiary-container": "#e17c5a",
+              "on-surface-variant": "#454652",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e7e8e9",
+              "primary": "#000b60",
+              "surface": "#f8f9fa",
+              "on-secondary-fixed-variant": "#354a53",
+              "tertiary": "#380b00",
+              "primary-container": "#142283",
+              "tertiary-fixed-dim": "#ffb59d",
+              "tertiary-fixed": "#ffdbd0",
+              "surface-bright": "#f8f9fa",
+              "inverse-surface": "#2e3132",
+              "on-primary-fixed": "#000c62",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#8390f2",
+              "on-tertiary-fixed": "#390c00",
+              "on-tertiary-fixed-variant": "#7b2e12",
+              "error": "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              "inverse-on-surface": "#f0f1f2",
+              "surface-container": "#edeeef",
+              "secondary-container": "#cfe6f2",
+              "surface-variant": "#e1e3e4",
+              "secondary-fixed": "#cfe6f2",
+              "secondary": "#4c616c",
+              "background": "#f8f9fa",
+              "surface-container-low": "#f3f4f5",
+              "on-primary-fixed-variant": "#303c9a",
+              "on-error": "#ffffff",
+              "primary-fixed": "#dfe0ff",
+              "surface-dim": "#d9dadb",
+              "secondary-fixed-dim": "#b4cad6",
+              "on-surface": "#191c1d",
+              "on-secondary": "#ffffff",
+              "outline": "#767683",
+              "on-secondary-container": "#526772",
+              "inverse-primary": "#bcc2ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #000b60 0%, #142283 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar (Suppressed/Ghost version for focus) -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 py-3 bg-slate-50/85 backdrop-blur-xl border-b border-indigo-900/10 z-50">
+<div class="text-xl font-bold tracking-tighter text-indigo-950 font-headline">
+            Architectural Intelligence
+        </div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-indigo-50/50 transition-all text-slate-500">
+<span class="material-symbols-outlined" data-icon="lock_open">lock_open</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Profile" data-alt="professional headshot of a business executive in a clean minimalist studio setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaZGN63ehmQxpf4EFvuMlVRSXMUXSZVuAV_IYZAiCfEvYBJPdq4IFHXCVazCAchcmCgFrd3fQLYo7Yd4c75cx6t0w4qJd0gZDlZDDSL5genuupyzZppRxaCWR_Qx8Ipap8AQNyQsuoX-QjCzY6hkoFHMnzXJkbrH0K9WR8vhumr080lItjfUTk0scN5QHcA1WYEGZYAQA7btqHbK9_Dvv0wT8mWK_FE-sKFOYeAquJR_BhJQ88G9MehxRfQmzm7aykMwnHJGpEVnbI"/>
+</div>
+</div>
+</header>
+<main class="min-h-screen pt-24 pb-12 px-6 flex flex-col items-center justify-center">
+<!-- Center Focus Area: Bento-inspired Lockout Design -->
+<div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- Left Column: Critical Status & Message -->
+<div class="md:col-span-7 bg-surface-container-lowest p-8 rounded-xl shadow-[0_20px_40px_rgba(0,11,96,0.06)] flex flex-col justify-between">
+<div>
+<div class="inline-flex items-center px-4 py-1 rounded-full bg-tertiary-container text-tertiary-fixed text-[0.6875rem] font-label uppercase tracking-widest mb-6">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="error">error</span>
+                        Access Restricted
+                    </div>
+<h1 class="text-display-md font-headline font-extrabold text-primary leading-tight mb-4 text-4xl lg:text-5xl">
+                        Account Suspended
+                    </h1>
+<p class="text-body-md text-on-surface-variant max-w-md leading-relaxed mb-8">
+                        Your account access is temporarily restricted due to a billing issue. To maintain service continuity and restore full dashboard access, please reconcile your outstanding balance.
+                    </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="primary-gradient text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 group">
+                        Update Payment Method
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="px-8 py-4 rounded-xl text-on-primary-fixed-variant font-semibold hover:bg-surface-container-low transition-all">
+                        Contact Support
+                    </button>
+</div>
+</div>
+<!-- Right Column: Contextual Info -->
+<div class="md:col-span-5 flex flex-col gap-6">
+<!-- Tenant Summary Card -->
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-center">
+<span class="text-[0.6875rem] font-label uppercase tracking-widest text-on-surface-variant mb-2">Workspace</span>
+<h3 class="font-headline font-bold text-xl text-primary mb-4">Metropolis Urban Planning</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Active Assets</span>
+<span class="font-headline font-bold text-on-surface">1,248</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Tenant Tier</span>
+<span class="font-headline font-bold text-on-surface">Enterprise Gold</span>
+</div>
+</div>
+</div>
+<!-- Billing Alert Card -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant/15 flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-icon="payments">payments</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface">Payment Overdue</h4>
+<p class="text-xs text-on-surface-variant mt-1">Invoice #INV-2024-0089 fell into arrears on Oct 12, 2023.</p>
+</div>
+</div>
+<div class="bg-surface-container-highest/30 p-4 rounded-lg flex justify-between items-center">
+<span class="text-sm font-label uppercase tracking-tighter font-semibold">Total Due</span>
+<span class="text-2xl font-headline font-extrabold text-primary">$4,820.00</span>
+</div>
+</div>
+<!-- Visual Anchor -->
+<div class="relative h-32 rounded-xl overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale opacity-40 group-hover:grayscale-0 transition-all duration-700" data-alt="wide angle shot of a modern glass and steel skyscraper reaching into a clear blue sky with sharp architectural lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyzSxiyxCWPoNEI_kFfKb_wZJYzv7qqpSXQJ3kDgPz7Z7T8uSNNSmtWg2eh40clZDzyNIMl_VbLo5JP0d-8rzNLUJ3TbRIW7WKpofSzmyIO7aFNMZuuVVffOKVKmF99so6YE_iIIb4-M81fxZFuzCwalcfmkbggjeDU5oyoOJTfMe6OrzUplB0FKl2Pifk6D9WsegeBZwqk8OxjEj-gZPlqM6xDPlldInVMJrbgZx7SirhjQlnAwWX6UPew-cn1B-Pfx2QEdulqtqh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+</div>
+</div>
+</div>
+<!-- Secondary Utility Area -->
+<div class="mt-12 w-full max-w-5xl">
+<h2 class="text-[0.6875rem] font-label uppercase tracking-[0.2em] text-on-surface-variant mb-6 text-center">Frequently Asked Questions</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="group">
+<h5 class="font-headline font-bold text-sm text-primary mb-2 group-hover:text-indigo-600 transition-colors">How long until access is restored?</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed">Access is typically restored within 5-10 minutes after a successful payment transaction is processed by our secure gateway.</p>
+</div>
+<div class="group">
+<h5 class="font-headline font-bold text-sm text-primary mb-2 group-hover:text-indigo-600 transition-colors">Is my data safe during lockout?</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed">Absolutely. All tenant data, analytics, and architectural models remain encrypted and safely stored. Only dashboard access is restricted.</p>
+</div>
+<div class="group">
+<h5 class="font-headline font-bold text-sm text-primary mb-2 group-hover:text-indigo-600 transition-colors">Can I export my data now?</h5>
+<p class="text-xs text-on-surface-variant leading-relaxed">Data export functions are currently disabled. Please reconcile your billing status to resume full management operations.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer Shell -->
+<footer class="w-full py-8 px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-400 font-label uppercase tracking-widest border-t border-indigo-100/10">
+<div>© 2024 Architectural Intelligence Systems</div>
+<div class="flex gap-6">
+<a class="hover:text-indigo-600 transition-colors" href="#">Security</a>
+<a class="hover:text-indigo-600 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-indigo-600 transition-colors" href="#">Privacy</a>
+</div>
+</footer>
+</body></html>

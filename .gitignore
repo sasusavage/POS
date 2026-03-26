@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.pyc
+instance/
+dist/
+build/
+.vscode/
+.idea/
+.DS_Store
+*.db
+*.sqlite
+logs/
+node_modules/
+package-lock.json
+package.json
+check_users.py
+reset_passwords.py

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Architectural Intelligence | Super Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#191c1d",
+              "surface-tint": "#4955b3",
+              "primary-fixed-dim": "#bcc2ff",
+              "outline-variant": "#c6c5d4",
+              "tertiary-container": "#5c1800",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed": "#071e27",
+              "surface-container-highest": "#e1e3e4",
+              "on-tertiary-container": "#e17c5a",
+              "on-surface-variant": "#454652",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e7e8e9",
+              "primary": "#000b60",
+              "surface": "#f8f9fa",
+              "on-secondary-fixed-variant": "#354a53",
+              "tertiary": "#380b00",
+              "primary-container": "#142283",
+              "tertiary-fixed-dim": "#ffb59d",
+              "tertiary-fixed": "#ffdbd0",
+              "surface-bright": "#f8f9fa",
+              "inverse-surface": "#2e3132",
+              "on-primary-fixed": "#000c62",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#8390f2",
+              "on-tertiary-fixed": "#390c00",
+              "on-tertiary-fixed-variant": "#7b2e12",
+              "error": "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              "inverse-on-surface": "#f0f1f2",
+              "surface-container": "#edeeef",
+              "secondary-container": "#cfe6f2",
+              "surface-variant": "#e1e3e4",
+              "secondary-fixed": "#cfe6f2",
+              "secondary": "#4c616c",
+              "background": "#f8f9fa",
+              "surface-container-low": "#f3f4f5",
+              "on-primary-fixed-variant": "#303c9a",
+              "on-error": "#ffffff",
+              "primary-fixed": "#dfe0ff",
+              "surface-dim": "#d9dadb",
+              "secondary-fixed-dim": "#b4cad6",
+              "on-surface": "#191c1d",
+              "on-secondary": "#ffffff",
+              "outline": "#767683",
+              "on-secondary-container": "#526772",
+              "inverse-primary": "#bcc2ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #020617; /* Dark Slate 950 for Super Admin context */
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+    </style>
+</head>
+<body class="font-body text-slate-300">
+<!-- Impersonation Banner -->
+<div class="fixed top-0 left-0 right-0 z-[60] bg-tertiary-fixed text-on-tertiary-fixed py-2 px-6 flex items-center justify-between shadow-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">visibility</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest">Currently impersonating: <span class="underline">Lumina Real Estate Group</span></span>
+</div>
+<button class="bg-on-tertiary-fixed text-tertiary-fixed px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter hover:opacity-90 transition-opacity">
+            Exit Session
+        </button>
+</div>
+<!-- TopNavBar Cluster (Integrated into Shell) -->
+<header class="fixed top-10 w-full flex justify-between items-center px-6 py-3 bg-slate-950/85 backdrop-blur-xl border-b border-white/5 z-50">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold tracking-tighter text-white font-headline">Architectural Intelligence</h1>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-indigo-400 border-b-2 border-indigo-400 pb-1 font-headline font-semibold tracking-tight text-sm" href="#">Dashboard</a>
+<a class="text-slate-500 hover:text-indigo-300 transition-all font-headline font-semibold tracking-tight text-sm" href="#">Analytics</a>
+<a class="text-slate-500 hover:text-indigo-300 transition-all font-headline font-semibold tracking-tight text-sm" href="#">Inventory</a>
+<a class="text-slate-500 hover:text-indigo-300 transition-all font-headline font-semibold tracking-tight text-sm" href="#">Tenants</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-white/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:bg-white/5 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="lock_open">lock_open</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-300 font-bold text-xs">
+                JD
+            </div>
+</div>
+</header>
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 z-40 w-64 pt-24 bg-slate-950 border-r border-white/5">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="text-sm font-bold text-white font-headline">Admin Console</h2>
+<p class="text-[10px] text-indigo-400/70 font-label uppercase tracking-widest">Superuser Access</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-white/5 text-indigo-300 shadow-sm rounded-lg transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-medium text-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="payments">payments</span>
+<span class="font-medium text-sm">Sales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="group">group</span>
+<span class="font-medium text-sm">Staff</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+<span class="font-medium text-sm">Support</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-white/5">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">security_update_good</span>
+                Manager Override
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 mt-2 text-red-400/70 hover:text-red-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span class="font-medium text-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-28 pb-12 px-10">
+<!-- Dashboard Header -->
+<div class="flex items-end justify-between mb-10">
+<div>
+<span class="text-indigo-400 font-label text-xs font-bold uppercase tracking-[0.2em] mb-2 block">System Pulse</span>
+<h2 class="text-4xl font-extrabold text-white font-headline tracking-tighter">Global Fleet Performance</h2>
+</div>
+<div class="flex gap-4">
+<div class="px-4 py-2 glass-card rounded-full flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs font-medium text-slate-300">All Clusters Operational</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Hero Metric Card -->
+<div class="col-span-12 lg:col-span-8 glass-card rounded-[2rem] p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-12">
+<div>
+<p class="text-slate-400 text-sm mb-1">Total Network Revenue</p>
+<h3 class="text-6xl font-black text-white font-headline tracking-tighter">$4.29M</h3>
+</div>
+<div class="text-right">
+<span class="text-emerald-400 text-sm font-bold">+12.4%</span>
+<p class="text-slate-500 text-[10px] uppercase tracking-widest mt-1">Vs Last Quarter</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-8">
+<div>
+<p class="text-slate-500 text-xs font-medium mb-2 uppercase tracking-widest">Active Tenants</p>
+<p class="text-2xl font-bold text-white">1,248</p>
+<div class="w-full bg-white/5 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-indigo-500 h-full w-[85%]"></div>
+</div>
+</div>
+<div>
+<p class="text-slate-500 text-xs font-medium mb-2 uppercase tracking-widest">API Latency</p>
+<p class="text-2xl font-bold text-white">42ms</p>
+<div class="w-full bg-white/5 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-[95%]"></div>
+</div>
+</div>
+<div>
+<p class="text-slate-500 text-xs font-medium mb-2 uppercase tracking-widest">Sys Health</p>
+<p class="text-2xl font-bold text-white">99.98%</p>
+<div class="w-full bg-white/5 h-1 mt-3 rounded-full overflow-hidden">
+<div class="bg-indigo-400 h-full w-[99%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative background elements -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-slate-800 text-8xl select-none" style="font-variation-settings: 'wght' 700;">monitoring</span>
+</div>
+</div>
+<!-- Health Snapshot Sidebar -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-indigo-900/20 border border-indigo-500/20 rounded-[2rem] p-6">
+<h4 class="text-white font-headline font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-400 text-lg">bolt</span>
+                        Anomalies Detected
+                    </h4>
+<div class="space-y-4">
+<div class="p-3 bg-white/5 rounded-xl border-l-2 border-amber-500">
+<p class="text-xs font-bold text-white mb-1 uppercase tracking-tight">Latency Spike - US East 1</p>
+<p class="text-[11px] text-slate-400">Response time increased by 140ms for 12 tenants.</p>
+</div>
+<div class="p-3 bg-white/5 rounded-xl border-l-2 border-red-500">
+<p class="text-xs font-bold text-white mb-1 uppercase tracking-tight">Renewal Failure</p>
+<p class="text-[11px] text-slate-400">Apex Retail Group failed auto-renewal processing.</p>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-[2rem] p-6 flex items-center justify-between">
+<div>
+<p class="text-slate-500 text-[10px] uppercase tracking-widest mb-1">Server Capacity</p>
+<p class="text-2xl font-bold text-white">68%</p>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-slate-800 flex items-center justify-center relative">
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-indigo-500" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="176" stroke-dashoffset="56" stroke-width="4"></circle>
+</svg>
+<span class="text-[10px] font-bold text-indigo-300">OPTIMAL</span>
+</div>
+</div>
+</div>
+<!-- Tenant Health Table Section -->
+<div class="col-span-12 glass-card rounded-[2rem] p-8">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold text-white font-headline">Tenant Health Matrix</h3>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:bg-white/10 transition-all">Filter: Critical</button>
+<button class="px-4 py-2 bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:bg-white/10 transition-all">Export Report</button>
+</div>
+</div>
+<div class="w-full overflow-hidden">
+<div class="grid grid-cols-5 py-4 border-b border-white/5 px-4">
+<div class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">Tenant Identity</div>
+<div class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">Status</div>
+<div class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">Utilization</div>
+<div class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500">Monthly Spend</div>
+<div class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 text-right">Actions</div>
+</div>
+<!-- Table Rows -->
+<div class="divide-y divide-white/5">
+<div class="grid grid-cols-5 py-5 px-4 items-center hover:bg-white/[0.02] transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-bold text-[10px]">LR</div>
+<span class="text-sm font-semibold text-white">Lumina Real Estate</span>
+</div>
+<div>
+<span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full border border-emerald-500/20">Active</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 max-w-[100px] h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-indigo-400 w-[72%]"></div>
+</div>
+<span class="text-xs text-slate-400">72%</span>
+</div>
+<div class="text-sm font-headline font-bold text-white">$24,400</div>
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-500 hover:text-indigo-400"><span class="material-symbols-outlined text-lg">insights</span></button>
+<button class="p-2 text-slate-500 hover:text-indigo-400"><span class="material-symbols-outlined text-lg">settings_ethernet</span></button>
+</div>
+</div>
+<div class="grid grid-cols-5 py-5 px-4 items-center hover:bg-white/[0.02] transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-slate-500/20 border border-slate-500/30 flex items-center justify-center text-slate-400 font-bold text-[10px]">VA</div>
+<span class="text-sm font-semibold text-white">Vanguard Architects</span>
+</div>
+<div>
+<span class="px-3 py-1 bg-tertiary-container/30 text-on-tertiary-container text-[10px] font-bold rounded-full border border-tertiary-container/50">Low Stock</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 max-w-[100px] h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500 w-[94%]"></div>
+</div>
+<span class="text-xs text-slate-400">94%</span>
+</div>
+<div class="text-sm font-headline font-bold text-white">$12,850</div>
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-500 hover:text-indigo-400"><span class="material-symbols-outlined text-lg">insights</span></button>
+<button class="p-2 text-slate-500 hover:text-indigo-400"><span class="material-symbols-outlined text-lg">settings_ethernet</span></button>
+</div>
+</div>
+<div class="grid grid-cols-5 py-5 px-4 items-center hover:bg-white/[0.02] transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-bold text-[10px]">SC</div>
+<span class="text-sm font-semibold text-white">Skyline Construction</span>
+</div>
+<div>
+<span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-[10px] font-bold rounded-full border border-indigo-500/20">Active</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 max-w-[100px] h-1.5 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-indigo-400 w-[12%]"></div>
+</div>
+<span class="text-xs text-slate-400">12%</span>
+</div>
+<div class="text-sm font-headline font-bold text-white">$48,200</div>
+<div class="flex justify-end gap-2">
+<button class="p-2 text-slate-500 hover:text-indigo-400"><span class="material-symbols-outlined text-lg">insights</span></button>
+<button class="p-2 text-slate-500 hover:text-indigo-400"><span class="material-symbols-outlined text-lg">settings_ethernet</span></button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-white/5 flex items-center justify-between">
+<p class="text-[10px] font-medium text-slate-500 uppercase tracking-widest">Showing 3 of 1,248 tenants</p>
+<button class="text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors uppercase tracking-widest">View All Platform Entities</button>
+</div>
+</div>
+<!-- Deployment Region Map -->
+<div class="col-span-12 lg:col-span-12 glass-card rounded-[2rem] p-8 h-[400px] flex flex-col relative overflow-hidden">
+<div class="relative z-10 mb-6">
+<h3 class="text-xl font-bold text-white font-headline">Global Distribution</h3>
+<p class="text-slate-400 text-xs">Node clusters and active user distribution across 14 regions.</p>
+</div>
+<div class="flex-1 rounded-2xl bg-slate-900 border border-white/5 relative overflow-hidden">
+<!-- Map Mockup -->
+<img alt="Global connectivity map" class="w-full h-full object-cover opacity-40 grayscale contrast-125" data-alt="A dark stylized world map with glowing indigo data points and interconnected thin neon lines representing network nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7HGLN4OLecnJIdRTlWCxLUNU1wn5i9HDQnwakw234s46Jb2WQjKcbhDYPaEs5_3SFH8evA7AOHtkHO0A_mWJJPamFJHSgqek5GgrfVALx2d9nrmaAZenNH7pTA01sRrFk-5Jwoa4agUv1fG6UvkFflPqtH6wbsanF4VF5Kcfu92me08m937UNDb2KhGhCELsCHdenVV6uX5aQItM3JWRlLkARCcHaLXjLoSz0ljPk2l8d0KeWeB2jYwH6MH5IVLXRJIJ6gQ1Z-4jv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent"></div>
+<!-- Region Tags -->
+<div class="absolute top-10 left-[20%] p-2 glass-card rounded-lg flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+<span class="text-[9px] font-bold text-white">US-EAST-1: 99.9%</span>
+</div>
+<div class="absolute bottom-20 right-[15%] p-2 glass-card rounded-lg flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+<span class="text-[9px] font-bold text-white">EU-WEST-2: 99.4%</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on desktop as per instructions) -->
+<footer class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-slate-950 border-t border-white/10">
+<div class="flex flex-col items-center justify-center bg-indigo-900/40 text-indigo-200 rounded-xl px-6 py-1">
+<span class="material-symbols-outlined text-lg" data-icon="point_of_sale" style="font-variation-settings: 'FILL' 1;">point_of_sale</span>
+<span class="font-label text-[10px] uppercase tracking-widest">POS</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-lg" data-icon="receipt_long">receipt_long</span>
+<span class="font-label text-[10px] uppercase tracking-widest">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-lg" data-icon="timer">timer</span>
+<span class="font-label text-[10px] uppercase tracking-widest">Shift</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-lg" data-icon="menu">menu</span>
+<span class="font-label text-[10px] uppercase tracking-widest">More</span>
+</div>
+</footer>
+</body></html>
