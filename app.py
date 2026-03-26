@@ -23,11 +23,15 @@ if database_url:
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'default-dev-secret-key-123')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-flask-secret-key-123')
 
 db.init_app(app)
 jwt.init_app(app)
+
+# Ensure tables are created on boot (useful for first-time production deploy)
+with app.app_context():
+    db.create_all()
 
 # Register custom middleware (billing lockout, etc.)
 register_middleware(app)
