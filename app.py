@@ -10,8 +10,12 @@ from middleware import register_middleware
 
 load_dotenv()
 
+database_url = os.getenv('DATABASE_URL')
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -183,4 +187,6 @@ def get_stats():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Simple setup for demo; use Flask-Migrate in production
-    app.run(host='0.0.0.0', port=5003)
+    
+    port = int(os.environ.get('PORT', 5003))
+    app.run(host='0.0.0.0', port=port)
