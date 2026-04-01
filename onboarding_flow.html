@@ -224,4 +224,37 @@
 <div class="fixed top-20 right-[10%] w-32 h-32 bg-secondary-container rounded-full blur-[80px] -z-10 opacity-30"></div>
 <div class="fixed bottom-20 left-[5%] w-48 h-48 bg-tertiary-container rounded-full blur-[100px] -z-10 opacity-20"></div>
 </main>
-</body></html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            window.location.href = 'platform_login_page.html';
+        }
+        
+        // Setup logout for any element containing logout or sign out text/icons
+        const logoutElements = Array.from(document.querySelectorAll('a, button, span, div')).filter(el => {
+            const text = el.textContent.toLowerCase();
+            return text.includes('sign out') || text.includes('logout');
+        });
+        
+        logoutElements.forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.clear();
+                window.location.href = 'platform_login_page.html';
+            });
+        });
+    });
+
+    async function apiFetch(endpoint, options = {}) {
+        const token = localStorage.getItem('access_token');
+        if (!token) { window.location.href = 'platform_login_page.html'; return; }
+        const headers = { 'Content-Type': 'application/json', 'Authorization': \Bearer \, ...(options.headers || {}) };
+        const response = await fetch(endpoint, { ...options, headers });
+        if (response.status === 401) { localStorage.clear(); window.location.href = 'platform_login_page.html'; return; }
+        return await response.json();
+    }
+</script>
+</body>
+</html>

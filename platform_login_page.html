@@ -197,7 +197,7 @@
 
             if (response.ok) {
                 const token = data.access_token;
-                localStorage.setItem('token', token);
+                localStorage.setItem('access_token', token);
                 
                 // Decode JWT to get role (simple base64 decode of payload)
                 const payload = JSON.parse(atob(token.split('.')[1]));

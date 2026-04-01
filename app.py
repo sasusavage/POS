@@ -147,7 +147,63 @@ def bulk_sync():
         
     return jsonify({"msg": "Sync successful", "records_processed": len(data.get('transactions', []))}), 200
 
-# --- SUPER ADMIN IMPERSONATION ---
+# --- SUPER ADMIN MANAGEMENT ---
+@app.route('/admin/stats', methods=['GET'])
+@jwt_required()
+@requires_role('SuperAdmin')
+def get_admin_stats():
+    """Global platform stats for Super Admin."""
+    total_tenants = Tenant.query.count()
+    # Calculate estimated MRR based on subscriptions
+    mrr = db.session.query(db.func.sum(Subscription.price)).join(Tenant).scalar() or 0
+    
+    # Plan distribution
+    plans = db.session.query(Subscription.name, db.func.count(Tenant.id)).join(Tenant).group_by(Subscription.name).all()
+    plan_distribution = {name: count for name, count in plans}
+    
+    return jsonify({
+        "total_tenants": total_tenants,
+        "mrr": mrr,
+        "churn_rate": "2.1%", # Placeholder for demo
+        "plan_distribution": plan_distribution
+    }), 200
+
+@app.route('/admin/tenants', methods=['GET'])
+@jwt_required()
+@requires_role('SuperAdmin')
+def get_all_tenants():
+    """List all tenants for the Super Admin dashboard."""
+    tenants = db.session.query(Tenant, Subscription.name).join(Subscription).all()
+    return jsonify([{
+        "id": t[0].id,
+        "name": t[0].name,
+        "domain": t[0].domain,
+        "subscription": t[1],
+        "status": t[0].billing_status,
+        "created_at": t[0].created_at.strftime('%Y-%m-%d')
+    } for t in tenants]), 200
+
+@app.route('/admin/tenants/<tenant_id>/toggle-status', methods=['POST'])
+@jwt_required()
+@requires_role('SuperAdmin')
+def toggle_tenant_status(tenant_id):
+    """Suspend or activate a tenant."""
+    tenant = Tenant.query.get_or_404(tenant_id)
+    tenant.billing_status = 'suspended' if tenant.billing_status == 'active' else 'active'
+    db.session.commit()
+    return jsonify({"msg": f"Tenant {tenant.name} is now {tenant.billing_status}"}), 200
+
+@app.route('/admin/tenants/<tenant_id>', methods=['DELETE'])
+@jwt_required()
+@requires_role('SuperAdmin')
+def delete_tenant(tenant_id):
+    """Delete a tenant (HARD DELETE for demo)."""
+    tenant = Tenant.query.get_or_404(tenant_id)
+    # In a real app, you'd do a soft delete or cascading delete
+    db.session.delete(tenant)
+    db.session.commit()
+    return jsonify({"msg": "Tenant deleted successfully"}), 200
+
 @app.route('/admin/impersonate', methods=['POST'])
 @jwt_required()
 @requires_role('SuperAdmin')

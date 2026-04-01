@@ -22,7 +22,7 @@ def force_seed():
         db.session.commit()
 
         # 3. Super Admin
-        sa = SuperAdmin(email='admin@example.com', password_hash=generate_password_hash('admin123'))
+        sa = SuperAdmin(email='admin@platform.com', password_hash=generate_password_hash('admin123'))
         db.session.add(sa)
 
         # 4. Users for Metropolis
@@ -35,7 +35,7 @@ def force_seed():
             tenant_id=metropolis.id, 
             email='cashier@metropolis.com', 
             username='metropolis_cashier', 
-            password_hash=generate_password_hash('password123'), 
+            password_hash=generate_password_hash('cashier123'), 
             role='Cashier', 
             branch_id=branch1.id
         )
@@ -45,7 +45,7 @@ def force_seed():
             tenant_id=metropolis.id, 
             email='owner@metropolis.com', 
             username='metropolis_owner', 
-            password_hash=generate_password_hash('password123'), 
+            password_hash=generate_password_hash('owner123'), 
             role='Owner', 
             branch_id=branch1.id
         )
@@ -54,9 +54,9 @@ def force_seed():
         db.session.commit()
         
         print("\n--- SEED COMPLETE ---")
-        print("Super Admin: admin@example.com / admin123")
-        print("Cashier: cashier@metropolis.com / password123")
-        print("Owner: owner@metropolis.com / password123")
+        print("Super Admin: admin@platform.com / admin123")
+        print("Cashier: cashier@metropolis.com / cashier123")
+        print("Owner: owner@metropolis.com / owner123")
 
 if __name__ == '__main__':
     force_seed()

@@ -255,7 +255,7 @@
 </div>
 
 <script>
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     if (!token) window.location.href = 'platform_login_page.html';
 
     async function fetchStats() {

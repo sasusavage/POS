@@ -252,7 +252,7 @@
 </main>
 
 <script>
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     if (!token) window.location.href = 'platform_login_page.html';
 
     async function fetchInventory() {
@@ -312,7 +312,7 @@
         if (a.innerText.trim().toLowerCase().includes('sign out')) {
             a.addEventListener('click', (e) => {
                 e.preventDefault();
-                localStorage.removeItem('token');
+                localStorage.removeItem('access_token');
                 window.location.href = 'platform_login_page.html';
             });
         }

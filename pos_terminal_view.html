@@ -144,10 +144,10 @@
 <span class="material-symbols-outlined text-[18px]">help</span>
                 Help Center
             </a>
-<a class="text-slate-500 px-4 py-2 flex items-center gap-3 text-xs font-semibold uppercase tracking-widest hover:text-error transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">logout</span>
-                Sign Out
-            </a>
+    <a class="text-slate-500 px-4 py-2 flex items-center gap-3 text-xs font-semibold uppercase tracking-widest hover:text-error transition-colors" href="#" id="signOutBtn">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        Sign Out
+    </a>
 </div>
 </aside>
 <main class="ml-64 mt-16 h-[calc(100vh-4rem)] grid grid-cols-12 overflow-hidden">
@@ -343,7 +343,7 @@
     // --- State Management ---
     let products = [];
     let cart = [];
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
 
     if (!token) {
         window.location.href = 'platform_login_page.html';
@@ -477,6 +477,16 @@
                 }
             });
         });
+
+        // Sign out logic
+        const signOutBtn = document.getElementById('signOutBtn');
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('access_token');
+                window.location.href = 'platform_login_page.html';
+            });
+        }
     });
 </script>
 </body></html>

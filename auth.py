@@ -54,7 +54,12 @@ def login_user(email, password):
 def superadmin_login(email, password):
     """Authenticate a SuperAdmin and return a JWT."""
     sa = SuperAdmin.query.filter_by(email=email).first()
-    if not sa or not check_password_hash(sa.password_hash, password):
+    if not sa:
+        print(f"DEBUG: SuperAdmin not found for {email}")
+        return None
+        
+    if not check_password_hash(sa.password_hash, password):
+        print(f"DEBUG: SuperAdmin password mismatch for {email}")
         return None
     
     additional_claims = {
