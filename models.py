@@ -87,6 +87,13 @@ class Transaction(TenantBase):
     payment_method = db.Column(db.String(50), nullable=False) # Cash, Card, MoMo
     status = db.Column(db.String(20), default='completed') # completed, refunded, pending
 
+class TransactionItem(TenantBase):
+    __tablename__ = 'transaction_items'
+    transaction_id = db.Column(db.String(36), db.ForeignKey('transactions.id'), nullable=False)
+    variant_id = db.Column(db.String(36), db.ForeignKey('product_variants.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False, default=1)
+    unit_price = db.Column(db.Float, nullable=False)
+
 class AuditLog(TenantBase):
     __tablename__ = 'audit_logs'
     user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)

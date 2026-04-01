@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 # Import our custom logic
-from models import db, Tenant, User, Transaction, AuditLog, Branch, Customer, Product, ProductVariant, Inventory, Subscription, SuperAdmin
+from models import db, Tenant, User, Transaction, TransactionItem, AuditLog, Branch, Customer, Product, ProductVariant, Inventory, Subscription, SuperAdmin
 from auth import jwt, requires_role, login_user, get_current_tenant_id, superadmin_login, generate_impersonation_token
 from middleware import register_middleware
 
@@ -79,16 +79,42 @@ def login():
 def create_transaction():
     tenant_id = get_current_tenant_id()
     data = request.json
-    # Logic to record transaction and update inventory
+    user_id = get_jwt_identity()
+    branch_id = data.get('branch_id')
+    
+    if not branch_id:
+        user_record = User.query.get(user_id)
+        if user_record:
+            branch_id = user_record.branch_id
+
     new_transaction = Transaction(
         tenant_id=tenant_id,
-        user_id=get_jwt_identity(),
-        branch_id=data.get('branch_id'),
+        user_id=user_id,
+        branch_id=branch_id,
         customer_id=data.get('customer_id'),
         total_amount=data.get('total_amount'),
         payment_method=data.get('payment_method')
     )
     db.session.add(new_transaction)
+    db.session.flush()
+    
+    for item in data.get('items', []):
+        ti = TransactionItem(
+            tenant_id=tenant_id,
+            transaction_id=new_transaction.id,
+            variant_id=item['variant_id'],
+            quantity=item['quantity'],
+            unit_price=item['unit_price']
+        )
+        db.session.add(ti)
+        
+        inv = Inventory.query.filter_by(tenant_id=tenant_id, branch_id=branch_id, variant_id=item['variant_id']).first()
+        if inv:
+            inv.quantity -= item.get('quantity', 1)
+        else:
+            inv = Inventory(tenant_id=tenant_id, variant_id=item['variant_id'], branch_id=branch_id, quantity=-item.get('quantity', 1))
+            db.session.add(inv)
+
     db.session.commit()
     return jsonify({"msg": "Transaction recorded", "transaction_id": new_transaction.id}), 201
 

@@ -378,7 +378,12 @@
                 body: JSON.stringify({
                     total_amount: total,
                     payment_method: paymentMethod,
-                    branch_id: null // Will be handled by backend from JWT if available
+                    branch_id: null, // Will be handled by backend from JWT if available
+                    items: cart.map(item => ({
+                        variant_id: item.id,
+                        quantity: item.quantity,
+                        unit_price: item.price
+                    }))
                 })
             });
 
